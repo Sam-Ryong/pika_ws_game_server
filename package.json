@@ -1,0 +1,17 @@
+{
+  "name": "pika-server",
+  "version": "1.0.0",
+  "description": "2024년 여름계절학기 풀스택 서비스 프로그래밍 프로젝트 서버",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket-io": "^1.0.0",
+    "socket.io": "^4.7.5",
+    "ws": "^8.17.1"
+  }
+}
