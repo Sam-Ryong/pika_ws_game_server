@@ -12,7 +12,7 @@ server.on("connection", (socket) => {
     console.log("Received message:", decodedMessage);
     // 받은 메시지를 모든 클라이언트에게 전송
     server.clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN) {
+      if (client !== socket && client.readyState === WebSocket.OPEN) {
         client.send(decodedMessage);
       }
     });
