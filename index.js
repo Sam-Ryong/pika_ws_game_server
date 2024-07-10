@@ -11,31 +11,30 @@ server.on("connection", (socket) => {
     const data = JSON.parse(message.toString("utf-8"));
     const type = data.type;
     const roomName = data.host;
-
     if (type == "makeRoom") {
       rooms[roomName] = new Set();
       rooms[roomName].add(socket);
     } else if (type == "outRoom") {
-      rooms[roomName].delete(socket);
-      if (rooms[roomName].size === 0) {
-        delete rooms[roomName];
-      }
-      rooms[roomName].forEach((client) => {
-        if (client !== socket && client.readyState === WebSocket.OPEN) {
-          client.send(
-            JSON.stringify({ type: "visitorOut", visitor: data.visitor })
-          );
+      if (rooms[roomName]) {
+        rooms[roomName].delete(socket);
+        if (rooms[roomName].size === 0) {
+          delete rooms[roomName];
         }
-      });
+      }
+
+      socket.send(JSON.stringify({ type: "outDone" }));
     } else if (type == "enterRoom") {
       if (!rooms[roomName]) {
+        console.log("noRoom 보내짐");
         socket.send(JSON.stringify({ type: "noRoom", host: data.host }));
       } else {
         if (rooms[roomName].length >= 2) {
+          console.log("fullRoom 보내짐");
           socket.send(JSON.stringify({ type: "fullRoom", host: data.host }));
         } else {
           rooms[roomName].forEach((client) => {
             if (client !== socket && client.readyState === WebSocket.OPEN) {
+              console.log("roomAccess 보내짐");
               client.send(
                 JSON.stringify({
                   type: "roomAccess",
@@ -51,8 +50,6 @@ server.on("connection", (socket) => {
     } else if (type == "permission") {
       rooms[roomName].forEach((client) => {
         if (client !== socket && client.readyState === WebSocket.OPEN) {
-          console.log("send permission");
-          console.log(data.permission);
           client.send(
             JSON.stringify({
               type: "permission",
@@ -65,14 +62,18 @@ server.on("connection", (socket) => {
       });
     } else if (type == "getRoom") {
       const roomList = Object.keys(rooms);
+      console.log("getRoom 요청됨");
       socket.send(JSON.stringify({ type: "getRoom", roomList: roomList }));
-      console.log(roomList);
     } else {
-      rooms[roomName].forEach((client) => {
-        if (client !== socket && client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify(data));
+      if (rooms[roomName]) {
+        if (rooms[roomName].size != 0) {
+          rooms[roomName].forEach((client) => {
+            if (client !== socket && client.readyState === WebSocket.OPEN) {
+              client.send(JSON.stringify(data));
+            }
+          });
         }
-      });
+      }
     }
   });
 
@@ -81,6 +82,18 @@ server.on("connection", (socket) => {
     Object.keys(rooms).forEach((roomName) => {
       if (rooms[roomName].has(socket)) {
         rooms[roomName].delete(socket);
+        rooms[roomName].forEach((client) => {
+          if (client !== socket && client.readyState === WebSocket.OPEN) {
+            console.log("giveup 보내짐");
+
+            client.send(
+              JSON.stringify({
+                type: "giveUp",
+                host: "giveUp",
+              })
+            );
+          }
+        });
         console.log(`클라이언트가 ${roomName} 방에서 나갔습니다.`);
 
         // 방에 남아 있는 클라이언트가 없으면 방 삭제
