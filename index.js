@@ -64,6 +64,16 @@ server.on("connection", (socket) => {
       const roomList = Object.keys(rooms);
       console.log("getRoom 요청됨");
       socket.send(JSON.stringify({ type: "getRoom", roomList: roomList }));
+    } else if (type == "point") {
+      if (rooms[roomName]) {
+        if (rooms[roomName].size != 0) {
+          rooms[roomName].forEach((client) => {
+            if (client.readyState === WebSocket.OPEN) {
+              client.send(JSON.stringify(data));
+            }
+          });
+        }
+      }
     } else {
       if (rooms[roomName]) {
         if (rooms[roomName].size != 0) {
