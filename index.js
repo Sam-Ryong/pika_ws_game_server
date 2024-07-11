@@ -88,7 +88,7 @@ function handleMessage(rooms, roomName, socket, data) {
     }
   }
 }
-function whenClose(rooms, RoomName, sockey) {
+function whenClose(rooms, socket) {
   Object.keys(rooms).forEach((roomName) => {
     if (rooms[roomName].has(socket)) {
       rooms[roomName].delete(socket);
@@ -146,7 +146,7 @@ server.on("connection", (socket) => {
   });
 
   // 클라이언트가 연결을 끊었을 때 처리하는 이벤트
-  socket.on("close", whenClose(rooms, roomName, socket));
+  socket.on("close", whenClose(rooms, socket));
 });
 
 console.log("WebSocket server is running on ws://localhost:3000");
