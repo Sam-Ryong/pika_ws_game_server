@@ -1,3 +1,5 @@
+const WebSocket = require("ws");
+
 function handlePermission(rooms, roomName, socket, data) {
   rooms[roomName].forEach((client) => {
     if (client !== socket && client.readyState === WebSocket.OPEN) {

@@ -1,3 +1,5 @@
+const WebSocket = require("ws");
+
 function handlePoint(rooms, roomName, data) {
   if (rooms[roomName]) {
     if (rooms[roomName].size != 0) {

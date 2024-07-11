@@ -1,3 +1,5 @@
+const WebSocket = require("ws");
+
 function whenClose(rooms, socket) {
   Object.keys(rooms).forEach((roomName) => {
     if (rooms[roomName].has(socket)) {

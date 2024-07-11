@@ -1,3 +1,5 @@
+const WebSocket = require("ws");
+
 function handleEnterRoom(rooms, roomName, socket, data) {
   if (!rooms[roomName]) {
     console.log("noRoom 보내짐");
