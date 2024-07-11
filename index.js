@@ -18,20 +18,29 @@ server.on("connection", (socket) => {
 
   socket.on("message", (message) => {
     const { data, type, roomName } = parseMessage(message);
-    if (type == "makeRoom") {
-      handleMakeRoom(rooms, roomName, socket);
-    } else if (type == "outRoom") {
-      handleOutRoom(rooms, roomName, socket);
-    } else if (type == "enterRoom") {
-      handleEnterRoom(rooms, roomName, socket, data);
-    } else if (type == "permission") {
-      handlePermission(rooms, roomName, socket, data);
-    } else if (type == "getRoom") {
-      handleGetRoom(rooms, socket);
-    } else if (type == "point") {
-      handlePoint(rooms, roomName, data);
-    } else {
-      handleMessage(rooms, roomName, socket, data);
+
+    switch (type) {
+      case "makeRoom":
+        handleMakeRoom(rooms, roomName, socket);
+        break;
+      case "outRoom":
+        handleOutRoom(rooms, roomName, socket);
+        break;
+      case "enterRoom":
+        handleEnterRoom(rooms, roomName, socket, data);
+        break;
+      case "permission":
+        handlePermission(rooms, roomName, socket, data);
+        break;
+      case "getRoom":
+        handleGetRoom(rooms, socket);
+        break;
+      case "point":
+        handlePoint(rooms, roomName, data);
+        break;
+      default:
+        handleMessage(rooms, roomName, socket, data);
+        break;
     }
   });
 
