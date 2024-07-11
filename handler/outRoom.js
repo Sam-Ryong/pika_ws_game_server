@@ -8,4 +8,4 @@ function handleOutRoom(rooms, roomName, socket) {
   socket.send(JSON.stringify({ type: "outDone" }));
 }
 
-export default handleOutRoom();
+module.exports = handleOutRoom;

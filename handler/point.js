@@ -10,4 +10,4 @@ function handlePoint(rooms, roomName, data) {
   }
 }
 
-export default handlePoint();
+module.exports = handlePoint;

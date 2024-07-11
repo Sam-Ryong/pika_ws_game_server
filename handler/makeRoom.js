@@ -3,4 +3,4 @@ function handleMakeRoom(rooms, roomName, socket) {
   rooms[roomName].add(socket);
 }
 
-export default handleMakeRoom();
+module.exports = handleMakeRoom;

@@ -10,4 +10,4 @@ function handleMessage(rooms, roomName, socket, data) {
   }
 }
 
-export default handleMessage();
+module.exports = handleMessage;

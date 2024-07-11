@@ -26,4 +26,4 @@ function whenClose(rooms, socket) {
   console.log("A client disconnected");
 }
 
-export default whenClose();
+module.exports = whenClose;

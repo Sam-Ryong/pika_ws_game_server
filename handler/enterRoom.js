@@ -23,4 +23,4 @@ function handleEnterRoom(rooms, roomName, socket, data) {
     }
   }
 }
-export default handleEnterRoom();
+module.exports = handleEnterRoom;

@@ -3,4 +3,4 @@ function handleGetRoom(rooms, socket) {
   socket.send(JSON.stringify({ type: "getRoom", roomList: roomList }));
 }
 
-export default handleGetRoom();
+module.exports = handleGetRoom;

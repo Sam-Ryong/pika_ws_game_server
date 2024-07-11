@@ -5,4 +5,4 @@ function parseMessage(message) {
   return { data, type, roomName };
 }
 
-export default parseMessage();
+module.exports = parseMessage;
