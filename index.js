@@ -1,4 +1,13 @@
 const WebSocket = require("ws");
+const handleMakeRoom = require("./handler/makeRoom.js");
+const handleOutRoom = require("./handler/outRoom.js");
+const handleEnterRoom = require("./handler/enterRoom.js");
+const handlePermission = require("./handler/permission.js");
+const handleGetRoom = require("./handler/getRoom.js");
+const handlePoint = require("./handler/point.js");
+const handleMessage = require("./handler/messageHandler.js");
+const whenClose = require("./handler/close.js");
+const parseMessage = require("./handler/messageParser.js");
 
 const server = new WebSocket.Server({ port: 3000 });
 
@@ -26,7 +35,6 @@ server.on("connection", (socket) => {
     }
   });
 
-  // 클라이언트가 연결을 끊었을 때 처리하는 이벤트
   socket.on("close", () => {
     whenClose(rooms, socket);
   });

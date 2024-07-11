@@ -4,3 +4,5 @@ function parseMessage(message) {
   const roomName = data.host;
   return { data, type, roomName };
 }
+
+export default parseMessage();

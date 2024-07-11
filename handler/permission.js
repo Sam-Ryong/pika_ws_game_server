@@ -12,3 +12,5 @@ function handlePermission(rooms, roomName, socket, data) {
     }
   });
 }
+
+export default handlePermission();

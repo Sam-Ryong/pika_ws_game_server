@@ -9,3 +9,5 @@ function handlePoint(rooms, roomName, data) {
     }
   }
 }
+
+export default handlePoint();
