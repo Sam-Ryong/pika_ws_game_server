@@ -13,6 +13,7 @@ WebSocket을 이용하여 두 명의 게이머가 실시간으로 **플레이어
 
 ## **🎮 Demo Video (YouTube)**
 
+[![Video Label](https://img.youtube.com/vi/CDBbBEOb3vc/maxresdefault.jpg)](https://youtu.be/CDBbBEOb3vc?t=0s)
 
 ---
 
