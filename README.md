@@ -80,6 +80,7 @@ HTTP가 아닌 WebSocket을 사용한 이유는 **실시간성**과 **양방향 
 
 - 🖥️ **User Data Server Code (Node.js)** → [pika\_server\_nodejs](https://github.com/Sam-Ryong/pika_server_nodejs)
 - 📱 **Flutter Client Code** → [pika\_client\_flutter](https://github.com/Sam-Ryong/pika_client_flutter)
+- 🖥️ **Flutter Client Code** → [pika\_ws\_game\_server](https://github.com/Sam-Ryong/pika_ws_game_server)
 
 ---
 
